@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  img {
+    border-radius: 50%;
+    box-shadow: 0 0 15px #999;
+    width: 100px;
+    margin: auto;
+  }
+  picture {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+
+  picture.small > img {
+    width: 50px;
+  }
+  
+  img.disabled {
+    opacity: 0.3;
+  }
+</style>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<body>
+  <dir id="app">    
+    <h1>Men in tech</h1>
+  </dir>
+
+  <script type="text/babel">
+    const $app = document.getElementById('app')
+    const useState = React.useState
+    
+    const Avatar = ({id, name = 'gabriel'}) => {
+      const [enabled, setEnabled] = useState(true)
+      const [small, setSmall] = useState(true)
+
+
+      const src = `https://randomuser.me/api/portraits/men/${id}.jpg`
+
+      const imgClassName = enabled ? '' : 'disabled'
+      const pictClassName = small ? '' : 'small'
+
+      return (
+        <picture className={pictClassName}>
+
+          <img 
+            onClick={() => {
+              setEnabled(!enabled)
+            }} 
+            className={imgClassName} 
+            src={src} 
+          />
+          <h1>{enabled ? name : 'desactivado'}</h1> 
+
+          <button 
+          onClick={() => {
+            setSmall(!small)
+          }}>
+            small
+          </button>
+
+          <br/>
+
+        </picture>
+      )
+    }
+
+
+    const Boton_contador = () => {
+      const [count, setCount] = useState(0)
+      return (
+        <div>
+          <h1>
+            {count}
+          </h1>
+          <button onClick={() => {
+            setCount(count + 1)
+          }}>
+            Count
+          </button>
+        </div>
+      )
+    }
+
+    // const Contador = () => {
+      
+    //   const [countador]
+
+    //   return (
+    //     <div>
+    //       <span>{contadorValor}</span>
+    //       <br/>
+    //       <button onClick={() => (contadorActualizador(contadorValor + 1))} > Incrementar (+) </button>
+    //       <br/>
+    //       <button onClick={() => (contadorActualizador(contadorValor - 1))} > Decrementar (-) </button>
+    //     </div>
+    //   )
+    // }
+
+    ReactDOM.render(
+      /*
+      <div>
+        <Avatar id={10} name='oscar' />
+        <Avatar id={20} name='raul'/>
+        <Avatar id={24} />
+      </div>
+      */
+     
+      <div>
+        <Boton_contador/>
+      </div>
+      ,
+      $app
+      )
+      
+      // return createElement('img', {src})
+      
+      // createElement('div', null, [createElement(Avatar, {id: 1}), createElement(Avatar, {id: 2})]), $app)
+    
+    
+    
+    // const Avatar = params => {
+    //   const src = `https://randomuser.me/api/portraits/men/${params.id}.jpg`
+    //   return `
+    //     <picture>
+    //       <img src="${src}" alt="">
+    //       ${params.name}
+    //     </picture>
+    //   `
+    // }
+
+    // const nombres = ['Gabriel', 'Jose', 'Marcos', 'Jesus', 'Josue Capote']
+    
+    // for(let i = 0; i < nombres.length; i++) {
+    //   $app.innerHTML += Avatar({id: i, name: nombres[i]})
+    // }
+
+    // $app.querySelectorAll('img').forEach(img => {
+    //   img.addEventListener('click', () => {
+    //     img.classList.toggle('disabled')
+    //   })
+    // })
+
+    </script>
+  
+</body>
+</html>
