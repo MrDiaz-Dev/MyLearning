@@ -9,7 +9,6 @@ const root = ReactDOM.createRoot(rootElement)
 
 root.render(
   <React.StrictMode>
-    {/* <App propGabo='hola gabo'/> */}
     <App />
   </React.StrictMode>,
 )

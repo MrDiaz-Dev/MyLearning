@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useContext} from "react";
+import { ToDoContext } from "../ToDoContext/ToDoContext";
 import './ToDoSearch.css';
 
-const ToDoSearch = ({searchValue, setSearchValue }) => {
+const ToDoSearch = () => {
+
+  const {
+    searchValue, 
+    setSearchValue 
+  } = useContext(ToDoContext)
 
   const onSearchToDos = (event) =>   {
 
