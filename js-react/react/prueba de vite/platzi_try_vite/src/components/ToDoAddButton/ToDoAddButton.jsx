@@ -1,17 +1,21 @@
-import React from "react";
+// @ts-nocheck
+import { useContext } from "react";
+import { ToDoContext } from "../ToDoContext/ToDoContext";
 import './ToDoAddButton.css';
 
 const ToDoAddButton = () => {
 
-  const onClickAddButton = (msg) => {
-    alert(msg);
+  const { setOpenModal } = useContext(ToDoContext);
+
+  const onClickAddButton = () => {
+    setOpenModal(prevState => !prevState);
   }
 
   return (
     <button 
     className="ToDoAddButton"
     onClick={() => {
-      onClickAddButton('Aqui debemos colocar un modal');
+      onClickAddButton();
     }}
     >
       +

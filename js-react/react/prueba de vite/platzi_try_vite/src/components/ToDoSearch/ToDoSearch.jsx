@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useContext} from "react";
 import { ToDoContext } from "../ToDoContext/ToDoContext";
 import './ToDoSearch.css';

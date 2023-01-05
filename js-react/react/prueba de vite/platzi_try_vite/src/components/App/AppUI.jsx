@@ -1,3 +1,4 @@
+// @ts-nocheck
 import './App.css';
 import React from "react";
 import { useContext } from 'react'
@@ -9,6 +10,8 @@ import { ToDoList } from "../ToDoList/ToDoList";
 import { ToDoItem } from '../ToDoItem/ToDoItem';
 import { ToDoAddButton } from '../ToDoAddButton/ToDoAddButton';
 import { ToDoContext } from '../ToDoContext/ToDoContext'
+import { Modal } from '../Modal/Modal';
+import { ToDoForm } from '../ToDoForm/ToDoForm';
 
 const AppUI = () => {
 
@@ -17,7 +20,8 @@ const AppUI = () => {
     error, 
     searchedToDos, 
     completeToDos, 
-    deleteToDos 
+    deleteToDos,
+    openModal
   } = useContext(ToDoContext);
 
   return (
@@ -29,9 +33,26 @@ const AppUI = () => {
       <ToDoSearch />
 
       <ToDoList>
-        {loading && <p>Tranquilo, estamos cargando</p>}
+
+        {
+          loading && 
+          <div id="contenedor">
+            <div className="loader" id="loader">Loading...</div>
+          </div>
+        }
+        
+        {
+          (!loading && searchedToDos.length === 0) && 
+          
+          <div className='creatodo'>
+            <h3>
+              Crea tu primera Tarea!! :D
+            </h3>
+          </div>
+        }
+
+
         {error && <p>Hubo un error, es tiempo para panico</p>}
-        {!(loading && !searchedToDos.length) && <p>Crea tu primer ToDo</p>}
 
         {searchedToDos.map(tarea => (
           <ToDoItem
@@ -43,6 +64,12 @@ const AppUI = () => {
           /> 
         ))}
       </ToDoList>
+
+      {!!openModal && (
+        <Modal>
+          <ToDoForm />
+        </Modal>
+      )}
 
       <ToDoAddButton />
     </div>
